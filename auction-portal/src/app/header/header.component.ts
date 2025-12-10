@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 
 @Component({
   selector: 'app-header',
@@ -11,10 +11,12 @@ import { Component, signal } from '@angular/core';
   `,
   styles: ``,
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit {
   protected readonly title = signal('Auction portal');
 
-  constructor() {
+  constructor() {}
+
+  ngOnInit(): void {
     //this.title = 'hello'
     console.log('hello ?');
     setTimeout(() => {
