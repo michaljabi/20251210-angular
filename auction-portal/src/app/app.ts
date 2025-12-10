@@ -25,10 +25,12 @@ export class App {
     }, 2000);
 
     setTimeout(() => {
-       this.auctions.update((current) => current.map(a => {
-        a.name = 'HELLO';
-        return a
-      }));
-    }, 5000)
+      this.auctions.update((current) =>
+        current.map((a) => {
+          a.name = 'HELLO';
+          return a;
+        })
+      );
+    }, 5000);
   }
 }
