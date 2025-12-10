@@ -4,5 +4,6 @@ import { Component } from '@angular/core';
   selector: 'app-sample',
   templateUrl: './sample.component.html',
   styleUrls: ['./sample.component.css'],
+  // styles: [``],
 })
 export class SampleComponent {}
