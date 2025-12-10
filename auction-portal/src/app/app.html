@@ -1,5 +1,11 @@
-<header>Auction Portal...</header>
+<header>Auction Portal... {{ 6 + 5 * 2 }} {{ [3, 2] }}</header>
 <main class="container">
-  <nav>Menu...</nav>
+  <nav>Menu... {{ {} }}</nav>
+  {{ hello() }}
+  <p>{{ title }}</p>
+  {{ hello() }}
+  {{ hello() }}
+
+  {{ auctions() | json }}
   <router-outlet />
 </main>
