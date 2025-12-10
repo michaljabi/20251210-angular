@@ -1,10 +1,11 @@
 import { JsonPipe } from '@angular/common';
 import { Component, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { HeaderComponent } from "./header/header.component";
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, JsonPipe],
+  imports: [RouterOutlet, JsonPipe, HeaderComponent],
   templateUrl: './app.html',
   // template: `Hello World`,
   styleUrl: './app.css',
