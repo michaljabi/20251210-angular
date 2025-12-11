@@ -1,4 +1,5 @@
-import { Component, signal } from '@angular/core';
+import { Component } from '@angular/core';
+import { RouterLink } from "@angular/router";
 
 interface MenuItem {
   link: string;
@@ -7,7 +8,7 @@ interface MenuItem {
 
 @Component({
   selector: 'app-main-menu',
-  imports: [],
+  imports: [RouterLink],
   template: `
     <nav class="navbar navbar-expand-lg navbar-light bg-light px-3 mb-3" [title]="myTooltip">
       <button class="navbar-toggler" type="button" (click)="handleMenuToggle()">
@@ -20,7 +21,7 @@ interface MenuItem {
           <!-- @if(menuItems.length) {  // Follow up do *ngIf="" *ngFor="" na jednym elemencie że nie można, to tutaj w control flow nie mamy takich problemów. -->
           @for(item of menuItems; track item.name) {
           <li class="nav-item">
-            <a class="nav-link" [href]="item.link">{{ item.name }}</a>
+            <a class="nav-link" [routerLink]="item.link">{{ item.name }}</a>
           </li>
           }
           <!-- } -->
