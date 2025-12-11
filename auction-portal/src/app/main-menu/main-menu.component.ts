@@ -1,10 +1,6 @@
 import { Component } from '@angular/core';
-import { RouterLink } from "@angular/router";
-
-interface MenuItem {
-  link: string;
-  name: string;
-}
+import { RouterLink } from '@angular/router';
+import type { MenuItem } from './menu-item';
 
 @Component({
   selector: 'app-main-menu',
