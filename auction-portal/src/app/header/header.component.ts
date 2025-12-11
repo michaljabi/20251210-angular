@@ -1,4 +1,4 @@
-import { Component, OnInit, signal } from '@angular/core';
+import { Component, OnInit, signal, input } from '@angular/core';
 
 @Component({
   selector: 'app-header',
@@ -6,13 +6,20 @@ import { Component, OnInit, signal } from '@angular/core';
   template: `
     <header class="mb-2 p-5 bg-warning">
       <h1>{{ title() }}</h1>
-      {{ title() }}
+      {{ subtitle() }}
     </header>
   `,
   styles: ``,
 })
 export class HeaderComponent implements OnInit {
   protected readonly title = signal('Auction portal');
+
+  // PROPS (z innychameworków np. React)
+  // FROM parent to child:
+  subtitle = input("kupuj i sprzedawaj on-line");
+
+  // FROM child to patent
+  // subtitleClicked = output<string>()
 
   constructor() {}
 
