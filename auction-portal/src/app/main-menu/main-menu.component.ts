@@ -1,26 +1,34 @@
 import { Component, signal } from '@angular/core';
+import { NgForOf } from '../../../node_modules/@angular/common/types/_common_module-chunk';
+
+interface MenuItem {
+  link: string;
+  name: string;
+}
 
 @Component({
   selector: 'app-main-menu',
-  imports: [],
+  imports: [NgForOf],
   template: `
-    <nav class="navbar navbar-expand-lg navbar-light bg-light px-3 mb-3" [title]="myTooltip" >
+    <nav class="navbar navbar-expand-lg navbar-light bg-light px-3 mb-3" [title]="myTooltip">
       <button class="navbar-toggler" type="button" (click)="handleMenuToggle()">
         <span class="navbar-toggler-icon"></span>
       </button>
       <!-- <div class="collapse navbar-collapse" [class.show]="true"> -->
       <!-- <div class="collapse navbar-collapse" [ngClass]="{ 'show': true }"> -->
-      <div class="collapse navbar-collapse" [class]="{ 'show': isMenuOpen }">
+      <div class="collapse navbar-collapse" [class]="{ show: isMenuOpen }">
         <ul class="navbar-nav">
-          <li class="nav-item">
-            <a class="nav-link" href="/auctions">Aukcje</a>
+          @for(item of menuItems; track item.name) {
+            <li class="nav-item">
+              <a class="nav-link" [href]="item.link">{{ item.name }}</a>
+            </li>
+          }
+          <!-- OLD Angular -->
+          <!-- 
+          <li *ngFor="item of menuItems;" class="nav-item">
+            <a class="nav-link" [href]="item.link">{{item.name}}</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/promotions">Promocje</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/advices">Podpowiadamy</a>
-          </li>
+          -->
         </ul>
       </div>
     </nav>
@@ -28,9 +36,23 @@ import { Component, signal } from '@angular/core';
   styles: ``,
 })
 export class MainMenuComponent {
+  protected menuItems: MenuItem[] = [
+    {
+      link: '/auctions',
+      name: 'Aukcje',
+    },
+    {
+      link: '/promotions',
+      name: 'Promocje',
+    },
+    {
+      link: '/advices',
+      name: 'Podpowiadamy',
+    },
+  ];
 
-  myTooltip = 'Hello!'
-  auctions = 'Aukcje'
+  myTooltip = 'Hello!';
+  auctions = 'Aukcje';
 
   isMenuOpen = false;
   // isMenuOpenSn = signal(false);

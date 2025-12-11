@@ -6,6 +6,11 @@ interface Fruit {
   name: string;
 }
 
+type MyFruit = {
+  amount: number;
+  name: string;
+};
+
 @Component({
   selector: 'app-for-of-loop',
   template: `
