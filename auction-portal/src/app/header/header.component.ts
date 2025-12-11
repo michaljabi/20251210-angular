@@ -5,8 +5,8 @@ import { Component, OnInit, signal, Input, input } from '@angular/core';
   imports: [],
   template: `
     <header class="mb-2 p-5 bg-warning">
-      <h1>{{ title() }}</h1>
-      {{ subtitle() }}
+      <h1>{{ title() }} </h1>
+      {{ subtitle() }} {{ a() }}
     </header>
   `,
   styles: ``,
@@ -16,7 +16,10 @@ export class HeaderComponent implements OnInit {
 
   // PROPS (z innychameworków np. React)
   // FROM parent to child:
-  subtitle = input("kupuj i sprzedawaj on-line");
+  subtitle = input('kupuj i sprzedawaj on-line');
+
+  a = input.required<number>(); // required nie ma wartości domyślnej więc trzeba dodefiniować typ w <tut>
+  b = input(0);
   // niepolecane (stare API)
   // @Input() subtitle = "kupuj i sprzedawaj on-line"
 
