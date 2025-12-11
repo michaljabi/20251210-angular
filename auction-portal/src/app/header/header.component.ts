@@ -1,4 +1,4 @@
-import { Component, OnInit, signal, input } from '@angular/core';
+import { Component, OnInit, signal, Input, input } from '@angular/core';
 
 @Component({
   selector: 'app-header',
@@ -17,6 +17,8 @@ export class HeaderComponent implements OnInit {
   // PROPS (z innychameworków np. React)
   // FROM parent to child:
   subtitle = input("kupuj i sprzedawaj on-line");
+  // niepolecane (stare API)
+  // @Input() subtitle = "kupuj i sprzedawaj on-line"
 
   // FROM child to patent
   // subtitleClicked = output<string>()
