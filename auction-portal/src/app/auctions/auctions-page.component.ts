@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { AuctionItem } from './auction-item';
 
 @Component({
   selector: 'app-auctions-page',
@@ -15,4 +16,18 @@ import { Component } from '@angular/core';
   `,
   styles: ``,
 })
-export class AuctionsPageComponent {}
+export class AuctionsPageComponent implements OnInit {
+
+  //https://angular.dev/api/core/inject#usage-notes
+  //engine = inject(Engine);
+
+  // todo: change to signal<AuctionItem[]>([])
+  acutions: AuctionItem[] = []
+
+  ngOnInit(): void {
+    // Todo: backend call..
+
+    // odniesienie do instancji z DependencyInjection
+    //this.engine
+  }
+}
