@@ -1,5 +1,4 @@
 import { Component, signal } from '@angular/core';
-import { NgForOf } from '../../../node_modules/@angular/common/types/_common_module-chunk';
 
 interface MenuItem {
   link: string;
@@ -8,7 +7,7 @@ interface MenuItem {
 
 @Component({
   selector: 'app-main-menu',
-  imports: [NgForOf],
+  imports: [],
   template: `
     <nav class="navbar navbar-expand-lg navbar-light bg-light px-3 mb-3" [title]="myTooltip">
       <button class="navbar-toggler" type="button" (click)="handleMenuToggle()">
@@ -18,14 +17,16 @@ interface MenuItem {
       <!-- <div class="collapse navbar-collapse" [ngClass]="{ 'show': true }"> -->
       <div class="collapse navbar-collapse" [class]="{ show: isMenuOpen }">
         <ul class="navbar-nav">
+          <!-- @if(menuItems.length) {  // Follow up do *ngIf="" *ngFor="" na jednym elemencie że nie można, to tutaj w control flow nie mamy takich problemów. -->
           @for(item of menuItems; track item.name) {
-            <li class="nav-item">
-              <a class="nav-link" [href]="item.link">{{ item.name }}</a>
-            </li>
+          <li class="nav-item">
+            <a class="nav-link" [href]="item.link">{{ item.name }}</a>
+          </li>
           }
+          <!-- } -->
           <!-- OLD Angular -->
           <!-- 
-          <li *ngFor="item of menuItems;" class="nav-item">
+          <li *ngIf="" *ngFor="item of menuItems;" class="nav-item">
             <a class="nav-link" [href]="item.link">{{item.name}}</a>
           </li>
           -->
