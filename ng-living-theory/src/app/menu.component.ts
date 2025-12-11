@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { VegetableService } from './b-dependency-injection/vegetable.service';
 
 @Component({
   selector: 'app-menu',
@@ -40,6 +41,7 @@ import { RouterLink } from '@angular/router';
         </li>
         <li>
           <a routerLink="/long-distance"> Daleka odległość... </a>
+          {{ vegetableService.vegetables().join('|') }}
         </li>
         <li>
           <a routerLink="/server-side"> Dane z serwera API</a>
@@ -99,4 +101,6 @@ import { RouterLink } from '@angular/router';
     </nav>
   `,
 })
-export class MenuComponent {}
+export class MenuComponent {
+  protected vegetableService = inject(VegetableService);
+}

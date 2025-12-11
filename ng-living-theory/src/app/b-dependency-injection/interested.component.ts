@@ -25,4 +25,8 @@ import { VegetableService } from './vegetable.service';
 })
 export class InterestedComponent {
   vegetableService = inject(VegetableService);
+
+  constructor() {
+    // this.vegetableService.vegetables.set([]);
+  }
 }

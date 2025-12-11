@@ -18,6 +18,7 @@ import { TestMyBehaviourComponent } from './f-testing/test-my-behaviour.componen
 import { DataFromServerSideComponent } from './b-dependency-injection/data-from-server-side/data-from-server-side.component';
 import { AllInOneComponent } from './a-all-in-one/all-in-one.component';
 import { SignalDrivenFromComponent } from './d-forms/signal-driven-from.component';
+import { CollectBothComponent } from './b-dependency-injection/collect-both/collect-both.component';
 
 export const routes: Routes = [
   { path: '', component: HelloComponent },
@@ -32,7 +33,7 @@ export const routes: Routes = [
   { path: 'methods', component: MethodsComponent },
   // B:
   { path: 'parent-child', component: ParentToChildComponent },
-  { path: 'long-distance', component: CommunicateWithLongDistanceComponent },
+  { path: 'long-distance', component: CollectBothComponent },
   { path: 'server-side', component: DataFromServerSideComponent },
   // C:
   { path: 'pipes', component: BuildInPipesComponent },

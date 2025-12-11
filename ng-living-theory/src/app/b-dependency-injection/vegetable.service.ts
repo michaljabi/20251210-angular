@@ -18,6 +18,10 @@ export class VegetableService {
     // Zaktualizuj sygnał o nowe warzywo:
     this.#vegetables.update((vegetables) => [...vegetables, veggie]);
   }
+
+  makeEmpty() {
+    this.#vegetables.set([]);
+  }
 }
 
 /*
@@ -61,8 +65,12 @@ export class VegetableService {
      this.vegetables.push(veggie);
    }
 
-   getAll(): string[] {
+   getAll(): readonly string[] {
      return this.vegetables;
    }
 }
+
+const instance = new VegetableService();
+
+instance.getAll().push('potato');
 */

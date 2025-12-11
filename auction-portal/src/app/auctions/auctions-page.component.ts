@@ -1,17 +1,21 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { AuctionItem } from './auction-item';
 import { AuctionsResourceService } from './auctions-resource.service';
+import { JsonPipe } from '@angular/common';
 
 @Component({
   selector: 'app-auctions-page',
-  imports: [],
+  imports: [JsonPipe],
   template: `
     <section>
       <h2>Lista naszych aukcji</h2>
+      {{ acutions() | json }}
       <div class="row">
-        @for(i of [1,2,3,4,5,6,7,8,9]; track i) {
-        <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2">[aukcja {{ i }}]</div>
-        } ...
+        @for(a of acutions(); track a.id) {
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2">
+          {{ a | json }}
+        </div>
+        }
       </div>
     </section>
   `,
@@ -24,7 +28,7 @@ export class AuctionsPageComponent implements OnInit {
   private readonly auctionsResourceService = inject(AuctionsResourceService);
 
   // todo: change to signal<AuctionItem[]>([])
-  acutions: AuctionItem[] = [];
+  protected readonly acutions = signal<AuctionItem[]>([]);
 
   ngOnInit(): void {
     // Todo: backend call..
@@ -34,6 +38,7 @@ export class AuctionsPageComponent implements OnInit {
     this.auctionsResourceService.getAll().subscribe({
       next: (auctionsFromServer) => {
         console.log(auctionsFromServer);
+        this.acutions.set(auctionsFromServer);
       },
     });
   }
