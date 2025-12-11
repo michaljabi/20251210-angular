@@ -34,4 +34,8 @@ export class App {
       );
     }, 5000);
   }
+
+  handleHover(text:string) {
+    console.log('Odbieram', text)
+  }
 }

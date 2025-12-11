@@ -1,4 +1,4 @@
-import { Component, OnInit, signal, Input, input } from '@angular/core';
+import { Component, OnInit, signal, Input, input, output } from '@angular/core';
 
 @Component({
   selector: 'app-header',
@@ -6,7 +6,7 @@ import { Component, OnInit, signal, Input, input } from '@angular/core';
   template: `
     <header class="mb-2 p-5 bg-warning">
       <h1>{{ title() }} </h1>
-      {{ subtitle() }} {{ a() }}
+      <em (mouseover)="subtitleHovered.emit(subtitle())">{{ subtitle() }}</em> {{ a() }}
     </header>
   `,
   styles: ``,
@@ -24,7 +24,7 @@ export class HeaderComponent implements OnInit {
   // @Input() subtitle = "kupuj i sprzedawaj on-line"
 
   // FROM child to patent
-  // subtitleClicked = output<string>()
+  subtitleHovered = output<string>()
 
   constructor() {}
 
