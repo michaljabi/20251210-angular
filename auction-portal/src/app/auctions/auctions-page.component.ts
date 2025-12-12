@@ -13,10 +13,10 @@ import { AuctionCard } from "./auction-card/auction-card";
       <!-- {{ acutions() | json }} -->
       <div class="row">
         @for(a of acutions(); track a.id) {
-        <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2">
-          <!-- {{ a | json }} -->
-          <app-auction-card [auction]="a" />
-        </div>
+          <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2">
+            <!-- {{ a | json }} -->
+            <app-auction-card [auction]="a" />
+          </div>
         }
       </div>
     </section>
