@@ -29,6 +29,10 @@ import type { MenuItem } from './menu-item';
           -->
         </ul>
       </div>
+      <div class="text-light d-flex gap-2">
+        <a class="btn btn-outline-primary" routerLink="/add-auction"> Dodaj </a>
+        <a class="btn btn-outline-secondary" routerLink="/cart"> Koszyk </a>
+      </div>
     </nav>
   `,
   styles: ``,
