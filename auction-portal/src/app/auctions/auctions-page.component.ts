@@ -3,10 +3,11 @@ import { AuctionItem } from './auction-item';
 import { AuctionsResourceService } from './auctions-resource.service';
 //import { JsonPipe } from '@angular/common';
 import { AuctionCard } from './auction-card/auction-card';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-auctions-page',
-  imports: [AuctionCard],
+  imports: [AuctionCard, RouterLink],
   template: `
     <section>
       <h2>Lista naszych aukcji</h2>
@@ -24,6 +25,11 @@ import { AuctionCard } from './auction-card/auction-card';
           <!-- {{ a | json }} -->
           <app-auction-card [auction]="a" />
         </div>
+        } @empty {
+          @if(!isLoading()) {
+            <div class="col-12 alert alert-warning">Nie ma jeszcze żadnych aukcji :( </div>
+            <button class="btn btn-primary" routerLink="/add-auction">Dodaj pierwszą aukcje </button>
+          }
         }
       </div>
     </section>
