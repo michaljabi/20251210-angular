@@ -1,9 +1,10 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit, signal } from '@angular/core';
 import { AuctionItem } from './auction-item';
 import { AuctionsResourceService } from './auctions-resource.service';
 //import { JsonPipe } from '@angular/common';
 import { AuctionCard } from './auction-card/auction-card';
 import { RouterLink } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-auctions-page',
@@ -37,7 +38,8 @@ import { RouterLink } from '@angular/router';
   styles: ``,
   // providers: [AuctionsResourceService]
 })
-export class AuctionsPageComponent implements OnInit {
+export class AuctionsPageComponent implements OnInit, OnDestroy {
+  
   //https://angular.dev/api/core/inject#usage-notes
   //engine = inject(Engine);
   private readonly auctionsResourceService = inject(AuctionsResourceService);
@@ -48,28 +50,36 @@ export class AuctionsPageComponent implements OnInit {
   // dla typów prostych nie warto (nie ma potrzeby) dodawania argumentu typu np tutaj: <string>
   protected readonly errorMessage = signal('');
 
+  private subscription?: Subscription
+
   ngOnInit(): void {
     this.reloadAuctions();
+  }
+  
+  ngOnDestroy(): void {
+    // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Optional_chaining
+    this.subscription?.unsubscribe();
   }
 
   reloadAuctions() {
      // odniesienie do instancji z DependencyInjection
     this.isLoading.set(true)
     this.errorMessage.set('')
-    this.auctionsResourceService.getAll().subscribe({
+    this.subscription = this.auctionsResourceService.getAll().subscribe({
       next: (auctionsFromServer: AuctionItem[]) => {
         console.log(auctionsFromServer);
         this.acutions.set(auctionsFromServer);
+        this.isLoading.set(false);
       },
       error: (err) => {
         console.log(err.message);
         this.errorMessage.set(err.message)
         this.isLoading.set(false)
       },
-      complete: () => {
-        console.log('Completed!');
-        this.isLoading.set(false);
-      },
+      // complete: () => {
+      //   console.log('Completed!');
+      //   this.isLoading.set(false);
+      // },
     });
   }
 }

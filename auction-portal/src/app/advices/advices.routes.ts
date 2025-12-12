@@ -6,6 +6,7 @@ export const routes: Routes = [
   {
     path: '',
     component: AdvicePageComponent,
+    // resolve: async () => {},
     children: [
         { path: '', component: AdviceDetailsComponent },
         { path: ':adviceId', component: AdviceDetailsComponent },
