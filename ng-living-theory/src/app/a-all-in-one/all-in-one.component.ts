@@ -42,11 +42,11 @@ import { UpperCasePipe } from '@angular/common';
       <div
         class="is-display-flex is-gap-2 is-justify-content-center is-align-items-center"
       >
-        <button class="button is-primary" (click)="handleUpdateCount(-1)">
+        <button class="button is-primary" (click)="handleUpdateCount(-10)">
           -
         </button>
         <span class="title is-3 mt-4"> {{ counter() }} </span>
-        <button class="button is-warning" (click)="handleUpdateCount(1)">
+        <button class="button is-warning" (click)="handleUpdateCount(5)">
           +
         </button>
         <button class="button is-danger" (click)="counter.set(0)"> Ustaw 0 </button>
@@ -71,8 +71,10 @@ export class AllInOneComponent implements OnInit, OnDestroy {
 
   // Wartości opakowane "signals" to takie, które można traktować jako STAN danych, czyli dane, zmieniające sie w czasie
   protected readonly counter = signal(0);
+  protected readonly counter2 = signal(1);
+  protected readonly counter3 = signal(1);
   protected readonly doubleCounterPx = computed(
-    () => this.counter() * 2 + 'px',
+    () => this.counter() * 2 + this.counter2() + this.counter3() + 'px',
   );
   protected sampleValue = 'Wartość'; // Ta wartość nie zmienia się w czasie...
 
@@ -82,6 +84,10 @@ export class AllInOneComponent implements OnInit, OnDestroy {
     this.timerId = setTimeout(() => {
       this.counter.update((c) => c + 200);
     }, 5000);
+
+    // ten sygnał jest TYLKO DO ODCZYTU! (nie ma .set() nie ma .update())
+    // będzie aktualizowany na podstawie innych sygnałów.
+    // this.doubleCounterPx.set('')
   }
 
   ngOnDestroy(): void {

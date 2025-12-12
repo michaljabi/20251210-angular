@@ -1,4 +1,5 @@
 import { computed, Injectable, signal } from '@angular/core';
+import { BehaviorSubject, Observable } from 'rxjs';
 // import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
@@ -56,21 +57,35 @@ export class VegetableService {
 // Powyżej nie ma tak na prawdę, rocket science — poza tym, że robimy to na podstawie Observables !
 // DLA PORÓWNANIA, zobacz: ... może inaczej — klasycznie
 // Zrobilibyśmy to tak:
+
 /*
+// Single source of truth na temat warzyw.
+// zaczynamy od takiej logiki....
+// potem musimy na (jakimś etapie) nauczyć się robic tzw. signal-store
+// tak aby dane zmieniające się w czasie mogły aktualizować poprawnie widok.
 export class VegetableService {
 
-   private vegetables = ['lettuce', 'tomato', 'cucumber'];
+   private #vegetables = ['lettuce', 'tomato', 'cucumber'];
+
+   get numberOfVegetables() {
+      return #vegetables.length;
+   }
 
    add(veggie: string): void {
-     this.vegetables.push(veggie);
+     this.#vegetables.push(veggie);
    }
 
    getAll(): readonly string[] {
-     return this.vegetables;
+     return this.#vegetables;
    }
 }
 
 const instance = new VegetableService();
+
+instance.add('garlic');
+
+console.log(instance.getAll())
+console.log(instance.numberOfVegetables)
 
 instance.getAll().push('potato');
 */
