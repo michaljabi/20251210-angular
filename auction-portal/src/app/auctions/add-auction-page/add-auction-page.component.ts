@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 import { AuctionItem, AuctionItemWithoutId } from '../auction-item';
+import { AuctionsResourceService } from '../auctions-resource.service';
 
 @Component({
   selector: 'app-add-auction-page',
@@ -50,7 +51,8 @@ import { AuctionItem, AuctionItemWithoutId } from '../auction-item';
                   </span>
                 </div>
                 <!-- <input id="img" type="number" name="imgId" [ngModel]="imgId" (input)="imgId = +$event.target.value" required class="form-control" /> -->
-                <input id="img" type="number" name="imgId" [(ngModel)]="imgId" required class="form-control" />
+                <input id="img" type="number" name="imgId" ngModel [(ngModel)]="imgId" required class="form-control" />
+                <!-- [()] - bananas in the box -->
               </div>
             </div>
 
@@ -92,6 +94,8 @@ export class AddAuctionPageComponent {
     return 'https://picsum.photos/id/' + this.imgId + '/600/600'
   }
 
+  private readonly auctionsResourceService = inject(AuctionsResourceService)
+
 
   handleFormSubmit(form: NgForm) {
     if(form.invalid) {
@@ -101,12 +105,21 @@ export class AddAuctionPageComponent {
     // console.log(form.value);
 
     const auctionWithoutId: AuctionItemWithoutId = {
+      // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Nullish_coalescing
       title: form.value.title ?? '',
       imgUrl: this.imgUrl,
       price: form.value.price ?? 0,
       description: form.value.description || undefined
     }
-
-    console.log(auctionWithoutId)
+    
+    this.auctionsResourceService.addOne(auctionWithoutId).subscribe({
+      next: (auction) => {
+          console.log(auction)
+          form.reset({imgId: 180});
+      },
+      error: (err) =>{
+        console.error(err)
+      }
+    })
   }
 }

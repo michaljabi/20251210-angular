@@ -1,5 +1,5 @@
 import { inject, Injectable } from '@angular/core';
-import { AuctionItem } from './auction-item';
+import { AuctionItem, AuctionItemWithoutId } from './auction-item';
 import { HttpClient } from '@angular/common/http';
 
 // to jest TZW. stateless service
@@ -23,7 +23,7 @@ export class AuctionsResourceService {
     });
   }
 
-  addOne(auction: AuctionItem) {
-    return this.httpClient.post<AuctionItem>(this.auctionsEndpoint, auction);
+  addOne(newAuction: AuctionItemWithoutId) {
+    return this.httpClient.post<AuctionItem>(this.auctionsEndpoint, newAuction);
   }
 }
